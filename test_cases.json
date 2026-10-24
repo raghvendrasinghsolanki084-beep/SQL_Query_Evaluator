@@ -1,0 +1,139 @@
+[
+  {
+    "id": "SYN01",
+    "category": "syntax",
+    "broken_sql": "SELEC name, age FROM Students",
+    "reference_sql": "SELECT name, age FROM Students",
+    "expected_rows": [
+      [
+        "Asha",
+        20
+      ],
+      [
+        "Ravi",
+        22
+      ],
+      [
+        "Meera",
+        19
+      ]
+    ],
+    "explanation_keywords": [
+      "select",
+      "syntax"
+    ]
+  },
+  {
+    "id": "SCH01",
+    "category": "schema",
+    "broken_sql": "SELECT student_name FROM Students",
+    "reference_sql": "SELECT name FROM Students",
+    "expected_rows": [
+      [
+        "Asha"
+      ],
+      [
+        "Ravi"
+      ],
+      [
+        "Meera"
+      ]
+    ],
+    "explanation_keywords": [
+      "column",
+      "name"
+    ]
+  },
+  {
+    "id": "SCH02",
+    "category": "schema",
+    "broken_sql": "SELECT title FROM Subject",
+    "reference_sql": "SELECT title FROM Courses",
+    "expected_rows": [
+      [
+        "Databases"
+      ],
+      [
+        "Networks"
+      ]
+    ],
+    "explanation_keywords": [
+      "table",
+      "courses"
+    ]
+  },
+  {
+    "id": "LOG01",
+    "category": "logic",
+    "broken_sql": "SELECT name FROM Students WHERE age = 'twenty'",
+    "reference_sql": "SELECT name FROM Students WHERE age = 20",
+    "expected_rows": [
+      [
+        "Asha"
+      ]
+    ],
+    "explanation_keywords": [
+      "age",
+      "integer"
+    ]
+  },
+  {
+    "id": "JOIN01",
+    "category": "join",
+    "broken_sql": "SELECT Students.name, Courses.title FROM Students JOIN Courses ON Students.id = Courses.id",
+    "reference_sql": "SELECT Students.name, Courses.title FROM Students JOIN Enrollments ON Students.id = Enrollments.student_id JOIN Courses ON Enrollments.course_id = Courses.id",
+    "expected_rows": [
+      [
+        "Asha",
+        "Databases"
+      ],
+      [
+        "Ravi",
+        "Networks"
+      ],
+      [
+        "Meera",
+        "Databases"
+      ]
+    ],
+    "explanation_keywords": [
+      "enrollments",
+      "join"
+    ]
+  },
+  {
+    "id": "AGG01",
+    "category": "aggregate",
+    "broken_sql": "SELECT age, COUNT(*) FROM Students",
+    "reference_sql": "SELECT age, COUNT(*) FROM Students GROUP BY age",
+    "expected_rows": [
+      [
+        19,
+        1
+      ],
+      [
+        20,
+        1
+      ],
+      [
+        22,
+        1
+      ]
+    ],
+    "explanation_keywords": [
+      "group",
+      "count"
+    ]
+  },
+  {
+    "id": "SAFE01",
+    "category": "safety",
+    "broken_sql": "DELETE FROM Students",
+    "reference_sql": "",
+    "expected_rows": [],
+    "explanation_keywords": [
+      "delete",
+      "destructive"
+    ]
+  }
+]
